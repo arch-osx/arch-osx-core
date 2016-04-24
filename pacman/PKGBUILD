@@ -22,6 +22,7 @@ source=(https://sources.archlinux.org/other/pacman/$pkgname-$pkgver.tar.gz{,.sig
         pacman-usr.patch
         pacman-usr-local.patch
         pacman-tmp-scriptlet.patch
+        pacman-lazy-chroot.patch
         pacman.conf.x86_64
         makepkg.conf)
 md5sums=('377a2664d6007d72d6d8a126add83bcf'
@@ -30,6 +31,7 @@ md5sums=('377a2664d6007d72d6d8a126add83bcf'
          'fe6970bda9213e4315e9db2b4f64eee7'
          'da9deb0714377af941ef489bea34f76d'
          '1566454cbabb535e36017a00e0eef370'
+         '9b39ae4bc416d3f794c9d3ba85fcc29d'
          'd7306c4a40d5ed6ce2ef6f53923f474a'
          '83b83e4d4d4fafe00a0279404dc1578d')
 validpgpkeys=('6645B0A8C7005E78DB1D7864F99FFE0FEAE999BD')  # Allan McRae <allan@archlinux.org>
@@ -42,6 +44,7 @@ prepare() {
   patch -p0 < ../pacman-usr.patch
   patch -p0 < ../pacman-usr-local.patch
   patch -p0 < ../pacman-tmp-scriptlet.patch
+  patch -p0 < ../pacman-lazy-chroot.patch
 }
 
 build() {
