@@ -11,7 +11,7 @@ sha1sums=('e2a60aca818836181e7e6f8c4f2c323aca6ac057')
 
 build() {
   cd lzo-${pkgver}
-  ./configure --prefix=/usr/local --enable-shared --disable-dependency-tracking
+  ./configure --prefix=/opt/arch --enable-shared --disable-dependency-tracking
   make
 }
 

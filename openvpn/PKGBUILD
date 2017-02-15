@@ -14,10 +14,10 @@ validpgpkeys=('03300E11FED16F59715F9996C29D97ED198D22A3')  # Samuli Seppänen
 
 build() {
   cd "${srcdir}"/$pkgname-$pkgver
-  CFLAGS="$CFLAGS -DPLUGIN_LIBDIR=\\\"/usr/local/lib/openvpn\\\"" ./configure \
-    --prefix=/usr/local \
-    --sbindir=/usr/local/bin \
-    --mandir=/usr/local/share/man \
+  LZO_CFLAGS="-I/opt/arch/include" LZO_LIBS="-L/opt/arch/lib -llzo2" CFLAGS="$CFLAGS -DPLUGIN_LIBDIR=\\\"/opt/arch/lib/openvpn\\\"" ./configure \
+    --prefix=/opt/arch \
+    --sbindir=/opt/arch/bin \
+    --mandir=/opt/arch/share/man \
     --disable-debug \
     --disable-dependency-tracking \
     --disable-silent-rules \
@@ -31,21 +31,21 @@ package() {
 
   # Install openvpn
   make DESTDIR="${pkgdir}" install
-  install -d -m755 "${pkgdir}"/usr/local/etc/openvpn
+  install -d -m755 "${pkgdir}"/opt/arch/etc/openvpn
 
   # Install examples
-  install -d -m755 "${pkgdir}"/usr/local/share/openvpn
-  sed -i -e 's#/etc/openvpn#/usr/local/etc/openvpn#g' "sample/sample-config-files/openvpn-startup.sh"
-  cp -r sample/sample-config-files "${pkgdir}"/usr/local/share/openvpn/examples
+  install -d -m755 "${pkgdir}"/opt/arch/share/openvpn
+  sed -i -e 's#/etc/openvpn#/opt/arch/etc/openvpn#g' "sample/sample-config-files/openvpn-startup.sh"
+  cp -r sample/sample-config-files "${pkgdir}"/opt/arch/share/openvpn/examples
 
   # Install license
-  install -d -m755 "${pkgdir}"/usr/local/share/licenses/${pkgname}/
-  ln -sf /usr/local/share/doc/${pkgname}/{COPYING,COPYRIGHT.GPL} "${pkgdir}"/usr/local/share/licenses/${pkgname}/
+  install -d -m755 "${pkgdir}"/opt/arch/share/licenses/${pkgname}/
+  ln -sf /opt/arch/share/doc/${pkgname}/{COPYING,COPYRIGHT.GPL} "${pkgdir}"/opt/arch/share/licenses/${pkgname}/
 
   # Install contrib
-  install -d -m755 "${pkgdir}"/usr/local/share/openvpn/contrib
-  cp -r contrib "${pkgdir}"/usr/local/share/openvpn
+  install -d -m755 "${pkgdir}"/opt/arch/share/openvpn/contrib
+  cp -r contrib "${pkgdir}"/opt/arch/share/openvpn
 
   # We don't use PolarSSL, so this file is unnecessary and somewhat confusing.
-  rm "$pkgdir"/usr/local/share/doc/openvpn/README.polarssl
+  rm "$pkgdir"/opt/arch/share/doc/openvpn/README.polarssl
 }
