@@ -13,4 +13,4 @@ package() {
   install -m644 $srcdir/mirrorlist $pkgdir/opt/arch/etc/pacman.d/
 }
 
-md5sums=('694ebff28762ed5564cb92cce5bde492')
+md5sums=('85639be6316c44a91507dad32fd9e84b')
