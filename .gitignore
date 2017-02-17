@@ -1,4 +1,10 @@
 *.tar.*
 *.pkg
-pkg
-src
+*.tgz
+*.zip
+/*/pkg
+/*/src
+bash/bash43-*
+bash/bash43-*.sig
+readline/readline63-*
+readline/readline63-*.sig
